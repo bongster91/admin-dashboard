@@ -28,17 +28,34 @@ app.use('/general', generalRoutes);
 app.use('/management', managementRoutes);
 app.use('sales', salesRoutes);
 
+/* MONGOOSE SETUP */
+const PORT = process.env.PORT || 9999;
+mongoose.set('strictQuery', false);
+
+const connectMongo = async() => {
+    try {
+        mongoose.connect(process.env.MONGO_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          
+        })
+        .then(() => console.log(`MongoDB connected`))
+        .catch((error) => `Didn't connect, ERROR MSG: ${error}`);
+
+    } catch(error) {
+        console.log(error);
+        process.exit(1);
+    };
+};
+
+connectMongo().then(() => {
+    app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
+});
+
 app.get('/', (req, res) => {
     res.send('Admin Analytics Backend');
 });
 
 app.get('*', (req, res) => {
     res.status(404).send('404: Page not found');
-});
-
-
-const PORT = process.env.PORT;
-
-app.listen(PORT, () => {
-    console.log(`Listening on Port: ${PORT}`);
 });
