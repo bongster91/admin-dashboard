@@ -11,6 +11,10 @@ import generalRoutes from './routes/general.js';
 import managementRoutes from './routes/management.js';
 import salesRoutes from './routes/sales.js';
 
+// DATA IMPORTS
+import User from './models/User.js';
+import { dataUser } from './data/index.js';
+
 /* CONFIGURATION */
 dotenv.config();
 const app = express();
@@ -31,26 +35,25 @@ app.use('sales', salesRoutes);
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9999;
 mongoose.set('strictQuery', false);
+mongoose.set('debug', true);
 
-const connectMongo = async() => {
-    try {
-        mongoose.connect(process.env.MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-          
-        })
-        .then(() => console.log(`MongoDB connected`))
-        .catch((error) => `Didn't connect, ERROR MSG: ${error}`);
+mongoose
+    .connect(process.env.MONGO_VSCODE_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
-    } catch(error) {
-        console.log(error);
-        process.exit(1);
-    };
-};
-
-connectMongo().then(() => {
-    app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
-});
+        /* ONLY ADD DATA ONE TIME */
+        // AffiliateStat.insertMany(dataAffiliateStat);
+        // OverallStat.insertMany(dataOverallStat);
+        // Product.insertMany(dataProduct);
+        // ProductStat.insertMany(dataProductStat);
+        // Transaction.insertMany(dataTransaction);
+        // User.insertMany(dataUser);
+    })
+    .catch((error) => console.log(`${error} did not connect`));
 
 app.get('/', (req, res) => {
     res.send('Admin Analytics Backend');
