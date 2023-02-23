@@ -6,7 +6,8 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { themeSettings } from 'theme';
 
-import Dashboard from 'scenes/Dashboard';
+import Layout from 'scenes/layout';
+import Dashboard from 'scenes/dashboard';
 
 function App() {
     const mode = useSelector((state) => state.global.mode);
