@@ -26,7 +26,10 @@ import {
 import FlexBetween from 'components/FlexBetween';
 import profileImage from 'assets/popcat-meme.jpeg';
 
-const Navbar = () => {
+const Navbar = ({
+    isSidebarOpen,
+    setIsSidebarOpen,
+}) => {
     const dispatch = useDispatch();
     const theme = useTheme();
 
@@ -42,7 +45,7 @@ const Navbar = () => {
 
                 {/* LEFT SIDE */}
                 <FlexBetween>
-                    <IconButton onClick={() => console.log('open/close sidebar')} >
+                    <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)} >
                         <MenuIcon />
                     </IconButton>
 
