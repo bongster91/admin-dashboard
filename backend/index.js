@@ -50,7 +50,7 @@ mongoose.set('strictQuery', false);
 mongoose.set('debug', true);
 
 mongoose
-    .connect(process.env.MONGO_VSCODE_URL, {
+    .connect(process.env.MONGO_APP_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
