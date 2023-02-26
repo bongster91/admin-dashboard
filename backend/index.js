@@ -16,7 +16,14 @@ import User from './models/User.js';
 import Product from './models/Product.js';
 import ProductStat from './models/ProductStat.js';
 import Transaction from './models/Transaction.js'
-import { dataUser, dataProduct, dataProductStat, dataTransaction } from './data/index.js';
+import OverallStat from './models/OverallStat.js';
+import { 
+    dataUser, 
+    dataProduct, 
+    dataProductStat, 
+    dataTransaction,
+    dataOverallStat,
+} from './data/index.js';
 
 /* CONFIGURATION */
 dotenv.config();
@@ -33,7 +40,7 @@ app.use(cors());
 app.use('/client', clientRoutes);
 app.use('/general', generalRoutes);
 app.use('/management', managementRoutes);
-app.use('sales', salesRoutes);
+app.use('/sales', salesRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9999;
