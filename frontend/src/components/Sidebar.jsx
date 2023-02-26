@@ -146,53 +146,53 @@ const Sidebar = ({
                             </FlexBetween>
 
                         </Box>
+                        <List>
+                            { navItems.map(({ text, icon }) => {
+                                if(!icon) {
+                                    return (
+                                        <Typography key={text} sx={{ m:'2.25rem 0 1rem 3rem' }}>
+                                            { text }
+                                        </Typography>
+                                    )
+                                };
+                                const lowerCaseText = text.toLowerCase();
 
-                        { navItems.map(({ text, icon }) => {
-                            if(!icon) {
                                 return (
-                                    <Typography key={text} sx={{ m:'2.25rem 0 1rem 3rem' }}>
-                                        { text }
-                                    </Typography>
-                                )
-                            };
-                            const lowerCaseText = text.toLowerCase();
-
-                            return (
-                                <ListItem key={text} disablePadding >
-                                    <ListItemButton 
-                                        onClick={() => {
-                                            navigate(`/${lowerCaseText}`);
-                                            setActive(lowerCaseText);
-                                        }}
-                                        sx={{
-                                            backgroundColor: active === lowerCaseText
-                                                ? theme.palette.secondary[300]
-                                                : 'transparent',
-                                            color: active === lowerCaseText
-                                                ? theme.palette.primary[600]
-                                                : theme.palette.secondary[100]
-                                        }}
-                                    >
-                                        <ListItemIcon
+                                    <ListItem key={text} disablePadding >
+                                        <ListItemButton 
+                                            onClick={() => {
+                                                navigate(`/${lowerCaseText}`);
+                                                setActive(lowerCaseText);
+                                            }}
                                             sx={{
-                                                ml: '2rem',
+                                                backgroundColor: active === lowerCaseText
+                                                    ? theme.palette.secondary[300]
+                                                    : 'transparent',
                                                 color: active === lowerCaseText
                                                     ? theme.palette.primary[600]
-                                                    : theme.palette.secondary[200]
+                                                    : theme.palette.secondary[100]
                                             }}
                                         >
-                                            { icon }
-                                        </ListItemIcon>
-                                        <ListItemText primary={text} />
+                                            <ListItemIcon
+                                                sx={{
+                                                    ml: '2rem',
+                                                    color: active === lowerCaseText
+                                                        ? theme.palette.primary[600]
+                                                        : theme.palette.secondary[200]
+                                                }}
+                                            >
+                                                { icon }
+                                            </ListItemIcon>
+                                            <ListItemText primary={text} />
 
-                                        { active === lowerCaseText && (
-                                            <ChevronRightOutlined sx={{ ml: 'auto'}} />
-                                        )}
-                                    </ListItemButton>
-                                </ListItem>
-                            );
-                        }) }
-
+                                            { active === lowerCaseText && (
+                                                <ChevronRightOutlined sx={{ ml: 'auto'}} />
+                                            )}
+                                        </ListItemButton>
+                                    </ListItem>
+                                );
+                            }) }
+                        </List>
                     </Box>
 
                     <Box position='abosolute' bottom='2rem'>
